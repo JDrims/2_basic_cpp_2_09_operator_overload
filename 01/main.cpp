@@ -8,19 +8,11 @@ private:
 
 public:
     Fraction(int numerator, int denominator)
-    {
-        numerator_ = numerator;
-        denominator_ = denominator;
-    }
+        : numerator_(numerator), denominator_(denominator) {}
 
     bool operator==(const Fraction &f2) const
     {
         return ((this->numerator_ * f2.denominator_) == (this->denominator_ * f2.numerator_));
-    }
-
-    bool operator!=(const Fraction &f2) const
-    {
-        return ((this->numerator_ * f2.denominator_) != (this->denominator_ * f2.numerator_));
     }
 
     bool operator<(const Fraction &f2) const
@@ -28,19 +20,24 @@ public:
         return ((this->numerator_ * f2.denominator_) < (this->denominator_ * f2.numerator_));
     }
 
+    bool operator!=(const Fraction &f2) const
+    {
+        return !(*this == f2);
+    }
+
     bool operator>(const Fraction &f2) const
     {
-        return ((this->numerator_ * f2.denominator_) > (this->denominator_ * f2.numerator_));
+        return (f2 < *this);
     }
 
     bool operator<=(const Fraction &f2) const
     {
-        return ((this->numerator_ * f2.denominator_) <= (this->denominator_ * f2.numerator_));
+        return !(f2 < *this);
     }
 
     bool operator>=(const Fraction &f2) const
     {
-        return ((this->numerator_ * f2.denominator_) >= (this->denominator_ * f2.numerator_));
+        return !(*this < f2);
     }
 };
 
